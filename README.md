@@ -3,7 +3,7 @@ Simple Fetch Software for GNU/Linux
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
-![ponyfetch](https://raw.githubusercontent.com/ameliaprogs/ponyfetch/main/ponyfetch.png)
+![ponyfetch]()
 
 To install:
 
