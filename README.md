@@ -1,5 +1,6 @@
 # ponyfetch
-Simple Fetch Software for GNU/Linux
+## Simple Fetch Software for GNU/Linux
+### Current Version: 1.1
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
@@ -21,12 +22,12 @@ To uninstall:
 sudo make clean
 ```
 
-## Roadmap
+#### Roadmap
   - ~~Display Window Manager~~
   - ~~Display Terminal~~
   - Support for other POSIX compliant operating systems (BSDs)
   - Some sembalance of configurability
 
-## Tested Distros and Operating Systems
+#### Tested Distros and Operating Systems
   - Arch Linux
   - Manjaro Linux
