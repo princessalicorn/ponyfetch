@@ -23,7 +23,7 @@ sudo make clean
 
 ## Roadmap
   - ~~Display Window Manager~~
-  - ~~Display Terminal
+  - ~~Display Terminal~~
   - Support for other POSIX compliant operating systems (BSDs)
   - Some sembalance of configurability
 
