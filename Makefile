@@ -8,5 +8,5 @@ install:
 	chmod 755 ./ponyfetch
 	cp ./ponyfetch $(PREFIX)bin
 	rm ./ponyfetch
-clean
+clean:
 	rm $(PREFIX)bin/ponyfetch
