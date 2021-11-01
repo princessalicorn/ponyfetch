@@ -20,7 +20,7 @@ sudo make clean
 ```
 
 ## Roadmap
-  ~~- Window Manager Support~~
+  -~~Window Manager Support~~
   - Support for other POSIX compliant operating systems (BSDs)
   - Some sembalance of configurability
 
