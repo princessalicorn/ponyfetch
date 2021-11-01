@@ -10,27 +10,15 @@ using namespace std;
 
 namespace system_information
 {
-    string get_wm()
+    string get_info_from_env(const char* envvar)
     {
-        char* current_desktop;
-        stringstream safedesktopreturn;
-        string desktopreturn;
-
-        current_desktop = getenv("DESKTOP_SESSION");
-        safedesktopreturn << current_desktop;
-        desktopreturn = safedesktopreturn.str();
-        return desktopreturn;
-    }
-    string get_shell()
-    {
-        char* GetShell;
-        string shell;
-
-        GetShell = getenv("SHELL"); //You could just return the char* here but that is not a good idea.
-        stringstream safeshellreturn;
-        safeshellreturn << GetShell;
-        shell = safeshellreturn.str();
-        return shell;
+        string get_env_var;
+        string ret_env_var;
+        stringstream safereturn;
+        get_env_var = getenv(envvar); //You could just return the char* here but that is not a good idea.
+        safereturn << get_env_var;
+        ret_env_var = safereturn.str();
+        return ret_env_var;
     }
     string distro_name()
     {
@@ -110,10 +98,10 @@ void generate_ponyfetch_prompt()
 {
     cout << "         ,--, " << "Distro: " << system_information::distro_name() << "\n";
     cout << "  _ ___/ /\\|  " << "Kernel: " << system_information::kernel_version() << "\n";
-    cout << " ;( )__, )    "  << "Shell: " << system_information::get_shell() << "\n";
+    cout << " ;( )__, )    "  << "Shell: " << system_information::get_info_from_env("SHELL") << "\n";
     cout << "; //   \'--;   " << "Uptime: " << system_information::sys_uptime() << "\n";
-    cout << "  \\     |     " << "Desktop: " << system_information::get_wm() << "\n";
-    cout << "   ^    ^     " << "\n";
+    cout << "  \\     |     " << "Desktop: " << system_information::get_info_from_env("DESKTOP_SESSION") << "\n";
+    cout << "   ^    ^     " << "Terminal: " << system_information::get_info_from_env("TERM") << "\n";
 }
 
 int main()
