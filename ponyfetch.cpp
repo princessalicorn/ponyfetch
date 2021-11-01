@@ -10,6 +10,17 @@ using namespace std;
 
 namespace system_information
 {
+    string get_wm()
+    {
+        char* current_desktop;
+        stringstream safedesktopreturn;
+        string desktopreturn;
+
+        current_desktop = getenv("DESKTOP_SESSION");
+        safedesktopreturn << current_desktop;
+        desktopreturn = safedesktopreturn.str();
+        return desktopreturn;
+    }
     string get_shell()
     {
         char* GetShell;
@@ -97,11 +108,11 @@ namespace system_information
 
 void generate_ponyfetch_prompt()
 {
-    cout << "         ,--, " << "\n";
-    cout << "  _ ___/ /\\|  " << "Distro: " << system_information::distro_name() << "\n";
-    cout << " ;( )__, )    " << "Kernel: " << system_information::kernel_version() << "\n";
-    cout << "; //   \'--;   " << "Shell: " << system_information::get_shell() << "\n";
-    cout << "  \\     |     " << "Uptime: " << system_information::sys_uptime() << "\n";
+    cout << "         ,--, " << "Distro: " << system_information::distro_name() << "\n";
+    cout << "  _ ___/ /\\|  " << "Kernel: " << system_information::kernel_version() << "\n";
+    cout << " ;( )__, )    "  << "Shell: " << system_information::get_shell() << "\n";
+    cout << "; //   \'--;   " << "Uptime: " << system_information::sys_uptime() << "\n";
+    cout << "  \\     |     " << "Desktop: " << system_information::get_wm() << "\n";
     cout << "   ^    ^     " << "\n";
 }
 
