@@ -19,6 +19,11 @@ To uninstall:
 sudo make clean
 ```
 
+## Roadmap
+  ~~- Window Manager Support~~
+  - Support for other POSIX compliant operating systems (BSDs)
+  - Some sembalance of configurability
+
 ## Tested Distros and Operating Systems
   - Arch Linux
   - Manjaro Linux
