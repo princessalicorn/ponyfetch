@@ -34,3 +34,4 @@ sudo make clean
 #### Tested Distros and Operating Systems
   - Arch Linux
   - Manjaro Linux
+  - Cainaima GNU/Linux
