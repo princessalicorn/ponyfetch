@@ -5,6 +5,8 @@
 #include <sstream>
 #include <cstdlib>
 
+#include "config.h"
+
 using namespace std;
 
 
@@ -23,20 +25,30 @@ namespace system_information
     string distro_name()
     {
         string buffer;
+        string linev;
         ifstream distrofile;
         string delimiter = "\"";
         string output;
+        unsigned int line = 0;
+        string searval = "PRETTY_NAME";
 
         distrofile.open("/etc/os-release", ios::in);
         if(!distrofile)
         {
             cerr << "/etc/os-release does not exist. Come back here once you install your Linux distro." << endl;
         }
-        getline(distrofile, buffer);                //Grabbing OS name from the file
-        buffer.erase(0, 6);                        //Erasing useless first 6 bites
-        buffer.erase(buffer.size() - 1);          //Cutting off the last " from the string
-        distrofile.close();                      //Be a good mare and close out the file
-        return buffer;                          //Done!
+
+        while(getline(distrofile, linev)) {
+            line++;
+            if (linev.find(searval, 0) != string::npos) {
+                break;
+            }
+        }
+        linev.erase(0, 13);
+        linev.erase(linev.size() - 1);
+        distrofile.close();
+        return linev;
+
     }
     string kernel_version()
     {
@@ -107,5 +119,6 @@ void generate_ponyfetch_prompt()
 int main()
 {
     generate_ponyfetch_prompt();
+    //system_information::distro_name();
     return 0;
 }
