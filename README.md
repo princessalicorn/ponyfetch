@@ -2,7 +2,7 @@
 ## Simple Fetch Software for GNU/Linux
 ### Current Version: 1.2
 
-### Whats new in 1.1.1?
+### Whats new in 1.2?
   - You can now change the ASCII art and the labels used in ponyfetch via ``config.h``!
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
