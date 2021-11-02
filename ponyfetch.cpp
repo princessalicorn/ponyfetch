@@ -5,8 +5,6 @@
 #include <sstream>
 #include <cstdlib>
 
-#include "config.h"
-
 using namespace std;
 
 
