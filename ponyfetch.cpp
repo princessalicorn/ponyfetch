@@ -1,12 +1,6 @@
-#include <fstream>
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <sstream>
-#include <cstdlib>
+#include "config.h"
 
 using namespace std;
-
 
 namespace system_information
 {
@@ -106,12 +100,12 @@ namespace system_information
 
 void generate_ponyfetch_prompt()
 {
-    cout << "         ,--, " << "Distro: " << system_information::distro_name() << "\n";
-    cout << "  _ ___/ /\\|  " << "Kernel: " << system_information::kernel_version() << "\n";
-    cout << " ;( )__, )    "  << "Shell: " << system_information::get_info_from_env("SHELL") << "\n";
-    cout << "; //   \'--;   " << "Uptime: " << system_information::sys_uptime() << "\n";
-    cout << "  \\     |     " << "Desktop: " << system_information::get_info_from_env("DESKTOP_SESSION") << "\n";
-    cout << "   ^    ^     " << "Terminal: " << system_information::get_info_from_env("TERM") << "\n";
+    cout << ascii_lines::line1 << labels::label1 << system_information::distro_name() << "\n";
+    cout << ascii_lines::line2 << labels::label2 << system_information::kernel_version() << "\n";
+    cout << ascii_lines::line3 << labels::label3 << system_information::get_info_from_env("SHELL") << "\n";
+    cout << ascii_lines::line4 << labels::label4 << system_information::sys_uptime() << "\n";
+    cout << ascii_lines::line5 << labels::label5 << system_information::get_info_from_env("DESKTOP_SESSION") << "\n";
+    cout << ascii_lines::line6 << labels::label6 << system_information::get_info_from_env("TERM") << "\n";
 }
 
 int main()
