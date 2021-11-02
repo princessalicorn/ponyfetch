@@ -1,9 +1,9 @@
 # ponyfetch
 ## Simple Fetch Software for GNU/Linux
-### Current Version: 1.1.1
+### Current Version: 1.2
 
 ### Whats new in 1.1.1?
-  - Bugfix so now the Distroname will always be displayed
+  - You can now change the ASCII art and the labels used in ponyfetch via ``config.h``!
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
@@ -24,6 +24,11 @@ To uninstall:
 ```
 sudo make clean
 ```
+
+How to configure:
+
+It is rather basic. You only change the respective values you want to change. Labels and ASCII lines are labelled via what order they will appear in.
+Further information is provided in the header file itself!
 
 #### Roadmap
   - ~~Display Window Manager~~
