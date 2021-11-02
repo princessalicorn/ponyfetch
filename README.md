@@ -1,6 +1,9 @@
 # ponyfetch
 ## Simple Fetch Software for GNU/Linux
-### Current Version: 1.1
+### Current Version: 1.1.1
+
+### Whats new in 1.1.1?
+  - Bugfix so now the Distroname will always be displayed
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
