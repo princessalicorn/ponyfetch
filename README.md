@@ -1,9 +1,9 @@
 # ponyfetch
 ## Simple Fetch Software for GNU/Linux
-### Current Version: 1.2
+### Current Version: 1.3
 
-### Whats new in 1.2?
-  - You can now change the ASCII art and the labels used in ponyfetch via ``config.h``!
+### Whats new in 1.3?
+  - Ponyfetch compatibility with Solaris/Illumos/SunOS!
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
@@ -40,3 +40,4 @@ Further information is provided in the header file itself!
   - Arch Linux
   - Manjaro Linux
   - Cainaima GNU/Linux
+  - OpenIndiana
