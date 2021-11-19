@@ -1,15 +1,16 @@
 #include "config.hpp"
 
+#include <cstdio>
+#include <string.h>
+#include <utmpx.h>
+#include <sys/systeminfo.h>
+
 #ifdef __linux
 #define OS_TYPE 0
 #endif
 
 #ifdef __sun
 #define OS_TYPE 1
-#include <cstdio>
-#include <string.h>
-#include <utmpx.h>
-#include <sys/systeminfo.h>
 #endif
 
 using namespace std;
