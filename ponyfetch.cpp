@@ -1,9 +1,5 @@
 #include "config.hpp"
-
-#include <cstdio>
 #include <string.h>
-#include <utmpx.h>
-#include <sys/systeminfo.h>
 
 #ifdef __linux
 #define OS_TYPE 0
@@ -11,6 +7,9 @@
 
 #ifdef __sun
 #define OS_TYPE 1
+#include <cstdio>
+#include <sys/systeminfo.h>
+#include <utmpx.h>
 #endif
 
 using namespace std;
@@ -42,38 +41,34 @@ namespace system_information
         unsigned int line = 0;
         string searval = "PRETTY_NAME";
 
-        if (OS_TYPE == 0)
-        {
-                distrofile.open("/etc/os-release", ios::in);
-                if(!distrofile)
-                {
-                cerr << "/etc/os-release does not exist. Come back here once you install your Linux distro." << endl;
-                }
-
-                while(getline(distrofile, linev))
-                {
-                        line++;
-                        if (linev.find(searval, 0) != string::npos)
-                        {
-                                break;
-                        }
-                }
-
-                linev.erase(0, 13);
-                linev.erase(linev.size() - 1);
+#if OS_TYPE == 0
+        distrofile.open("/etc/os-release", ios::in);
+        if(!distrofile)
+	{
+        cerr << "/etc/os-release does not exist. Come back here once you install your Linux distro." << endl;
         }
-        if (OS_TYPE == 1)
+        while(getline(distrofile, linev))
         {
-                ifstream distrofile("/etc/release");
-                if (distrofile.good())
+                line++;
+                if (linev.find(searval, 0) != string::npos)
                 {
-                        distrofile >> ws;
-                        getline(distrofile, linev);
-                } else
-                {
-                        cerr << "/etc/release does not exist." << endl;
+                        break;
                 }
         }
+        linev.erase(0, 13);
+        linev.erase(linev.size() - 1);
+#endif
+#if OS_TYPE == 1
+        ifstream distrofile("/etc/release");
+        if (distrofile.good())
+        {
+                distrofile >> ws;
+                getline(distrofile, linev);
+        } else
+        {
+                cerr << "/etc/release does not exist." << endl;
+        }
+#endif
         distrofile.close();
         return linev;
 
@@ -84,27 +79,25 @@ namespace system_information
         ifstream versionfile;
         string delimiter = " ";
         string output;
-        if (OS_TYPE == 0)
+#if OS_TYPE == 0
+        versionfile.open("/proc/version", ios::in);
+        if(!versionfile)
         {
-                versionfile.open("/proc/version", ios::in);
-                if(!versionfile)
-                {
-                        cerr << "/proc/version does not exist. Is your computer on fire? Or worse... YOU USE WINDOWS." << endl;
-                }
-                versionfile.seekg(14, ios::beg);                              //reads to 14th byte in file
-                buffer << versionfile.rdbuf();                               //Transfer rest of file to variable
-                string filestring = buffer.str();                           //String Conversion
-                output = filestring.substr(0, filestring.find(delimiter)); //Cut it out at the next space
-                versionfile.close();                                      //Be a good mare and close out the file
+                cerr << "/proc/version does not exist. Is your computer on fire? Or worse... YOU USE WINDOWS." << endl;
         }
-        if (OS_TYPE == 1)
-        {
-                char out[16];
-                sysinfo(SI_RELEASE, out, sizeof(out)/sizeof(*out));
-                string retval(out);
-                output = retval;
-        }
-        return output;                                           //And done!
+        versionfile.seekg(14, ios::beg);                              //reads to 14th byte in file
+        buffer << versionfile.rdbuf();                               //Transfer rest of file to variable
+        string filestring = buffer.str();                           //String Conversion
+        output = filestring.substr(0, filestring.find(delimiter)); //Cut it out at the next space
+        versionfile.close();                                      //Be a good mare and close out the file
+#endif
+#if OS_TYPE == 1
+        char out[16];
+        sysinfo(SI_RELEASE, out, sizeof(out)/sizeof(*out));
+        string retval(out);
+        output = retval;
+#endif
+	return output;                                           //And done!
     }
     string sys_uptime()
     {
@@ -119,34 +112,31 @@ namespace system_information
         string output;
         string result;
 
-        if (OS_TYPE == 0)
+#if OS_TYPE == 0
+        uptimefile.open("/proc/uptime", ios::in);
+        if(!uptimefile)
         {
-                uptimefile.open("/proc/uptime", ios::in);
-                if(!uptimefile)
-                {
-                        cerr << "/proc/uptime does not exist. Are you in a time machine?" << endl;
-                }
-                buffer << uptimefile.rdbuf();                                //Transfer rest of file to variable
-                string filestring = buffer.str();                           //String Conversion
-                output = filestring.substr(0, filestring.find(delimiter)); //Cut it out at the decimal because no floats.
-                uptimefile.close();                                       //Be a good mare and close out the file
-                divtime = stoi(output);                                  //String to int
+		cerr << "/proc/uptime does not exist. Are you in a time machine?" << endl;
         }
-        if (OS_TYPE == 1)
+        buffer << uptimefile.rdbuf();                                //Transfer rest of file to variable
+        string filestring = buffer.str();                           //String Conversion
+        output = filestring.substr(0, filestring.find(delimiter)); //Cut it out at the decimal because no floats.
+        uptimefile.close();                                       //Be a good mare and close out the file
+        divtime = stoi(output);                                  //String to int
+#endif
+#if OS_TYPE == 1
+        int boottime = 0; //Taken from http://xaxxon.slackworks.com/rsapi/
+        int currenttime = time(NULL);
+        struct utmpx * ent;
+        while((ent = getutxent()))
         {
-                int boottime = 0; //Taken from http://xaxxon.slackworks.com/rsapi/
-                int currenttime = time(NULL);
-                struct utmpx * ent;
-                while((ent = getutxent()))
+                if (!strcmp ("system boot", ent->ut_line))
                 {
-                        if (!strcmp ("system boot", ent->ut_line))
-                        {
-                                boottime = ent->ut_tv.tv_sec;
-                        }
+                        boottime = ent->ut_tv.tv_sec;
                 }
-                divtime = currenttime - boottime;
-
         }
+        divtime = currenttime - boottime;
+#endif
         hours = (int)divtime / 3600;                               //3600 seconds in an hour
         hremainder = divtime % 3600;                              //Getting minutes and seconds
         minutes = (int)hremainder / 60;                          //The rest is self-explanatory
