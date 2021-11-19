@@ -38,10 +38,10 @@ namespace system_information
         ifstream distrofile;
         string delimiter = "\"";
         string output;
-        unsigned int line = 0;
         string searval = "PRETTY_NAME";
 
 #if OS_TYPE == 0
+	unsigned int line = 0;
         distrofile.open("/etc/os-release", ios::in);
         if(!distrofile)
 	{
@@ -59,7 +59,7 @@ namespace system_information
         linev.erase(linev.size() - 1);
 #endif
 #if OS_TYPE == 1
-        ifstream distrofile("/etc/release");
+        distrofile("/etc/release", ios::in);
         if (distrofile.good())
         {
                 distrofile >> ws;
