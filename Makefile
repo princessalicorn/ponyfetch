@@ -2,7 +2,7 @@ CC = g++
 PREFIX = /usr/
 
 compile:
-	$(CC) -Wall -fexceptions -std=c++20 -fpermissive ./ponyfetch.cpp -o ponyfetch
+	$(CC) -Wall -fexceptions -std=c++11 -fpermissive ./ponyfetch.cpp -o ponyfetch
 
 install:
 	chmod 755 ./ponyfetch
