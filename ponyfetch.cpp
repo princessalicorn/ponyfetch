@@ -12,6 +12,13 @@
 #include <utmpx.h>
 #endif
 
+#ifdef __FreeBSD__
+#define OS_TYPE 2
+#include <cstdio>
+#include <ctime>
+#include <sys/param.h>
+#endif
+
 using namespace std;
 
 namespace system_information
@@ -40,7 +47,7 @@ namespace system_information
         string output;
         string searval = "PRETTY_NAME";
 
-#if OS_TYPE == 0
+#if OS_TYPE == 0 || OS_TYPE == 2
 	unsigned int line = 0;
         distrofile.open("/etc/os-release", ios::in);
         if(!distrofile)
@@ -97,6 +104,9 @@ namespace system_information
         string retval(out);
         output = retval;
 #endif
+#if OS_TYPE == 2
+	output = to_string(__FreeBSD_version);
+#endif
 	return output;                                           //And done!
     }
     string sys_uptime()
@@ -136,6 +146,11 @@ namespace system_information
                 }
         }
         divtime = currenttime - boottime;
+#endif
+#if OS_TYPE == 2
+	struct timespec t;
+	clock_gettime(CLOCK_MONOTONIC, &t);
+	divtime = (int)t.tv_sec;
 #endif
         hours = (int)divtime / 3600;                               //3600 seconds in an hour
         hremainder = divtime % 3600;                              //Getting minutes and seconds
