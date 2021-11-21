@@ -1,9 +1,9 @@
 # ponyfetch
 ## Simple Fetch Software for GNU/Linux
-### Current Version: 1.3
+### Current Version: 1.4
 
-### Whats new in 1.3?
-  - Ponyfetch compatibility with Solaris/Illumos/SunOS!
+### Whats new in 1.4?
+  - Ponyfetch compatibility with FreeBSD!
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
@@ -33,7 +33,8 @@ Further information is provided in the header file itself!
 #### Roadmap
   - ~~Display Window Manager~~
   - ~~Display Terminal~~
-  - Support for other POSIX compliant operating systems (BSDs)
+  - ~~Support for other POSIX compliant operating systems (BSDs)~~
+  - Get working Desktop: variable for SunOS + FreeBSD
   - Some sembalance of configurability
 
 #### Tested Distros and Operating Systems
