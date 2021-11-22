@@ -42,3 +42,4 @@ Further information is provided in the header file itself!
   - Manjaro Linux
   - Cainaima GNU/Linux
   - OpenIndiana
+  - FreeBSD
