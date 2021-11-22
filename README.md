@@ -1,9 +1,10 @@
 # ponyfetch
-## Simple Fetch Software for GNU/Linux
-### Current Version: 1.4
+## Simple Fetch Software for POSIX operating systems
+### Current Version: 1.4.1
 
-### Whats new in 1.4?
+### Whats new in 1.4.1?
   - Ponyfetch compatibility with FreeBSD!
+  - Ensured Clang++ compatibility
 
 Have you ever wanted ponies to corrode your fetch software, no? Too bad!
 
